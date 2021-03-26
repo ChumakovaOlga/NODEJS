@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>translator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app" v-cloak>
+    <div class="card">
+        <h1 class="name"
+            v-text="name"></h1>
+        <div class="form-control">
+            <input
+                    class="area"
+                    type="text"
+                    :placeholder="placeholderString"
+                    v-model="inputValue"
+                    @keypress.enter="addNewNote"
+            />
+            <br>
+
+        </div>
+        <button class="btn"
+                @click="addNewNote"
+        >Translate
+        </button>
+
+        <br>
+        <ul class="list"
+            v-if="translations.length"
+        >
+            <li class="list-item"
+                v-for="(translation, index) in translations"
+            >
+                ({{index + 1}}) {{toUpperCase(translation)}}
+                <button
+                        class="btn danger"
+                        @click="removeNote(index)">x
+                </button>
+            </li>
+        </ul>
+        <br>
+        <h3 v-show="translations.length === 0">Empty translations list</h3>
+        <br>
+
+        <input type="radio"
+               id="one"
+               value=checked
+               v-model="checkedLanguage">
+        <label>Ru-Eng</label>
+        <br>
+        <input type="radio"
+               id="two"
+               v-model="checkedLanguage">
+        <label>Eng-Ru</label>
+        <hr>
+        <li>
+            <p>Translations number: {{ translations.length}}</p>
+        </li>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="app.js"></script>
+</body>
+</html>
